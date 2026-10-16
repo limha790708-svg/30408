@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import streamlit as st
 
 st.set_page_config(
@@ -32,10 +34,17 @@ st.markdown(
     .hero {
         position: relative;
         overflow: hidden;
+        height: 100%;
+        box-sizing: border-box;
         padding: clamp(2rem, 6vw, 4.5rem);
         border: 1px solid rgba(255,255,255,.8);
         border-radius: 28px;
         background: linear-gradient(125deg, rgba(255,255,255,.94), rgba(239,249,255,.84));
+        box-shadow: 0 20px 55px rgba(70, 133, 188, .14);
+    }
+
+    [data-testid="stImage"] img {
+        border-radius: 28px;
         box-shadow: 0 20px 55px rgba(70, 133, 188, .14);
     }
 
@@ -142,14 +151,34 @@ st.markdown(
     }
     </style>
 
-    <main>
-      <section class="hero">
-        <p class="eyebrow">MY LITTLE PROFILE · 2026</p>
-        <h1>안녕하세요,<br>임하연입니다! 💙</h1>
-        <p class="intro">배우고 싶은 것도, 만들어 보고 싶은 것도 많은<br>경복비즈니스고등학교 IT과 3학년 임하연입니다.</p>
-        <span class="hello">반가워요! (｡•̀ᴗ-)✧</span>
-      </section>
+    """,
+    unsafe_allow_html=True,
+)
 
+intro_column, image_column = st.columns([1.55, 1], gap="medium")
+
+with intro_column:
+    st.markdown(
+        """
+        <section class="hero">
+          <p class="eyebrow">MY LITTLE PROFILE · 2026</p>
+          <h1>안녕하세요,<br>임하연입니다! 💙</h1>
+          <p class="intro">배우고 싶은 것도, 만들어 보고 싶은 것도 많은<br>경복비즈니스고등학교 IT과 3학년 임하연입니다.</p>
+          <span class="hello">반가워요! (｡•̀ᴗ-)✧</span>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+with image_column:
+    st.image(
+        Path(__file__).parent / "ing" / "unnamed.jpg",
+        use_container_width=True,
+    )
+
+st.markdown(
+    """
+    <main>
       <h2 class="section-title">하연이를 소개해요 <span>🫧</span></h2>
       <section class="profile-grid">
         <article class="info-card">
